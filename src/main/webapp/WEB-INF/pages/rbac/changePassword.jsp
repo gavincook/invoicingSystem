@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<m:require src="jquery,bootstrap,common,ev,{rbac/changePassword}"></m:require>
+<m:require src="jquery,common,ev,{rbac/changePassword}"></m:require>
 <title>修改密码</title>
 </head>
 <body>

@@ -15,7 +15,7 @@ $(document).ready(function () {
 	 $("[id^='menu_']").click(function(){
 		 var $li = $(this);
 		 var id = $(this).attr("id").replace("menu_","");
-		 if($(".dropdown-menu",$li).find(".loading").length>0){
+		 if($(".submenu",$li).find(".loading").length>0){
 			 $.ajax({
 				  url:contextPath+'/menu/getSubMenus',
 				  data:{ 
@@ -26,13 +26,22 @@ $(document).ready(function () {
 					success:function(response){
 						var subMenus="";
 						$(eval(response)).each(function(index,e){
-							//subMenus+="<li data-url='"+e.url+"'><a href='#'>"+e.menuName+"</a></li>";
-							subMenus+="<li ><a href='"+contextPath+e.url+"' target='main'>"+e.menuName+"</a></li>";
+							subMenus+="<li ><a href=\"#\" data-href='"+contextPath+e.url
+									+"' target='main'> <i class=\"icon-double-angle-right\"></i>"
+									+e.menuName+"</a></li>";
 						});
-						$(".dropdown-menu",$li).html(subMenus);
+						$(".submenu",$li).html(subMenus);
 					}
 			 });
 		 }
+	 });
+	 
+	 $("[target='main']").live("click",function(){
+		var $menu = $(this);
+		$.getJsonData($menu.attr("data-href"),{},{dataType:'html',type:'Get'}).done(function(data){
+			$(".main-content").html(data);
+		});
+		return false;
 	 });
  });
 

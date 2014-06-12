@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<m:require src="jquery,noty,common,bootstrap,font"></m:require>
+<m:require src="jquery,noty,common,font"></m:require>
 <title>Moon数据库维护</title>
 <script type="text/javascript">
 	$(function(){

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<m:require src="jquery,zt,js/ztree.extend.js,common,bootstrap,table,dialog,js/pages/log/log.js"></m:require>
+<m:require src="jquery,zt,js/ztree.extend.js,common,table,dialog,js/pages/log/log.js"></m:require>
 <title>日志信息</title>
 </head>
 <body>

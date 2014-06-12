@@ -4,7 +4,7 @@
 <html>
 <head>
 	<title>数据字典</title>
-	<m:require src="jquery,common,noty,font,bootstrap,table,ev,dialog,{dictionary/dictionary}"></m:require>
+	<m:require src="jquery,common,noty,font,table,ev,dialog,{dictionary/dictionary}"></m:require>
 </head>
 
 <body>

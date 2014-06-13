@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<m:require src="jquery,common,ev,zt,js/ztree.extend.js,bootstrap,table,dialog,noty,font,{rbac/userList}"></m:require>
+<m:require src="common,ev,zt,js/ztree.extend.js,table,dialog,noty,font,{rbac/userList}"></m:require>
 <title>用户管理</title>
 </head>
 <body style="margin:0;">
@@ -13,26 +13,24 @@
      <div id="userTable"></div> 
      
      <!-- Modal -->
-<form id="userForm" class="hide">
-  <div>
+<form id="userForm" style="display: none;">
+  <div class="form-group">
   	<span class="label-text">用户名:</span>
-  	<input type="text" name="user.userName" validate="validate[required,call(isUserNameExists)]"/>
-  	<i class="fa fa-check"></i>
+  	<input type="text" class="form-control" name="user.userName" validate="validate[required,call(isUserNameExists)]"/>
   </div>
-  <div>
+  <div class="form-group">
   	<span class="label-text">密&nbsp;&nbsp;码:</span>
-  	<input type="password" name="user.password" id="password" validate="validate[minsize(6)]" errMsg="密码须6位以上">
+  	<input  class="form-control" type="password" name="user.password" id="password" validate="validate[minsize(6)]" errMsg="密码须6位以上">
   </div>
-  <div> 
+  <div class="form-group"> 
   	<span class="label-text">重复密码:</span>
-  	<input type="password" name="repassword" validate="validate[minsize(6),eq(#password)]">
+  	<input  class="form-control" type="password" name="repassword" validate="validate[minsize(6),eq(#password)]">
   </div>
-  <div>
+  <div class="form-group">
   	<span class="label-text">真实姓名:</span>
-  	<input type="text" name="user.realName" validate="validate[required]"/>
+  	<input class="form-control" type="text" name="user.realName" validate="validate[required]"/>
   </div>
 </form>
-
      <!-- 角色分配 -->
      <div id="roleTree" class="ztree" style="display:none;">  </div>
     

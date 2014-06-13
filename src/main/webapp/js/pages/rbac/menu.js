@@ -33,7 +33,10 @@ var setting = {
 				}else{
 					$(".preview").addClass("hide");
 				}
-				$("#rmenu").css("left",event.pageX).css("top",event.pageY).css("display","inline");
+				$("#rmenu").css("left",event.pageX).css("top",event.pageY).css({
+					"display":"inline",
+					"position":"fixed"
+				});
 				}
 			},
 			onDrop:function(event, treeId, treeNodes, targetNode, moveType, isCopy){

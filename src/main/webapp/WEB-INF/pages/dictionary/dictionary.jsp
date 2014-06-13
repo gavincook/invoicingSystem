@@ -4,14 +4,14 @@
 <html>
 <head>
 	<title>数据字典</title>
-	<m:require src="jquery,common,noty,font,table,ev,dialog,{dictionary/dictionary}"></m:require>
+	<m:require src="common,noty,font,table,ev,dialog,{dictionary/dictionary}"></m:require>
 </head>
 
 <body>
 	<div id="dictionaryTable"></div>
 	
 	<!-- 字典项表单 -->
-	<form id="dictionaryForm" class="hide">
+	<form id="dictionaryForm" style="display:none">
 		<div>
 			<span class="label-text">字典代码:</span> 
 			<input type="text" name="dictionary.code" validate="validate[required]"/>
@@ -23,7 +23,7 @@
 	</form>
 	
 	<!-- 字典参数表单 -->
-	<form id="dictionaryParamForm" class="hide">
+	<form id="dictionaryParamForm" style="display:none">
 		<div>
 			<span class="label-text">字典参数名称:</span> 
 			<input type="text" name="dictionary.name" validate="validate[required]"/>

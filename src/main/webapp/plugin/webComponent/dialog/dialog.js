@@ -11,7 +11,6 @@
 	var defaults = {
 		title:"",
 		buttons:[],
-		width:560,
 		callBack:{}
 	};
 
@@ -20,7 +19,7 @@
 			var $contentHtml = this;
 			var selector = this.selector;
 			var $dialogDiv = $(document.createElement("div"));
-			$dialogDiv.addClass("modal hide fade");
+			$dialogDiv.addClass("modal fade");
 
 			var $dialogHeader = $(document.createElement("div"));
 			$dialogHeader.addClass("modal-header");
@@ -49,8 +48,13 @@
 				}
 				$btnGroup.append($btn);
 			});
-
-			$dialogDiv.append($dialogHeader).append($dialogContent).append($btnGroup);
+		    var $modelDialog = $(document.createElement("div"));
+		    $modelDialog.addClass("modal-dialog");
+			var $modelContent = $(document.createElement("div"));
+			$modelContent.addClass("modal-content");
+			$modelContent.append($dialogHeader).append($dialogContent).append($btnGroup);
+			$modelDialog.append($modelContent);
+			$dialogDiv.append($modelDialog);
 			methods.bindEvents.call($dialogDiv,opts);
 			$dialogDiv.css({"width":opts.width,
 							 "margin-left":-opts.width/2});

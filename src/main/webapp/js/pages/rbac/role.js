@@ -19,7 +19,10 @@ var setting = {
 					$("*:not('.ztree')").one("click",function(e){
 						 $("#rmenu").css("display","none");
 					});
-					$("#rmenu").css("left",event.pageX).css("top",event.pageY).css("display","inline");
+					$("#rmenu").css("left",event.pageX).css("top",event.pageY).css({
+						"display":"inline",
+						"position":"fixed"
+					});
 				}
 				else{
 					$("#rmenu").css("display","none");

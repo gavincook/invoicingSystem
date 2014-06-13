@@ -81,6 +81,13 @@ public class UserAction extends BaseAction{
 		 return new ModelAndView("pages/rbac/userList");
 	 }
 	 
+	 @MenuMapping(url="/user/invoicing-user",name="用户管理",code="management_1",parentCode="management")
+	 @RequestMapping("/invoicing-user")
+	 @PermissionMapping(code="000008",name="用户列表")
+	 public ModelAndView invoicingUser(HttpServletRequest request){
+		 return new ModelAndView("pages/invoicing/users");
+	 }
+	 
 	 @PermissionMapping(code="000001",name="用户列表")
 	 @RequestMapping("/getUsersData")
 	 @ResponseBody

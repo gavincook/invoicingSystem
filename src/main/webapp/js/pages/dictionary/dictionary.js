@@ -1,40 +1,3 @@
-(function(){
-		$(function(){
-			var table = $("#dictionaryTable").table({
-				url:contextPath+"/dictionary/list",
-				columns:[{name:"id"},{name:"code",display:"字典代码"},{name:"name",display:"字典名称"}],
-				formatData:function(data){return data.result;},
-				title:"字典",
-				rowId:"id",
-				buttons:[
-				         {
-				        	 text:"增加字典项",
-				        	 name:'addBtn',
-				        	 click:addDictionary,
-				        	 action:'add'
-				         },
-				         {
-				        	 text:"增加字典参数",
-				        	 name:'addDicParamBtn',
-				        	 click:addDicParam,
-				        	 action:'addDicParam'
-						 },
-						 {
-							 text:"删除字典",
-							 name:'deleteBtn',
-							 click:removeDictionary,
-							 action:'delete'
-						 },
-						 {
-							 text:"编辑字典",
-							 name:'editBtn',
-							 click:editDictionary
-						 }
-				         ]
-			});
-			
-		});
-		
 		//添加字典项弹出窗口
 		var addDictionary = function(){
 			$("#dictionaryForm").dialog({
@@ -192,5 +155,39 @@
 	   		 }).fail(function(){
 	   			 moon.success("更新字典失败");
 	   		 });
-		}
-	})();
+		};
+		$(function(){
+			var table = $("#dictionaryTable").table({
+				url:contextPath+"/dictionary/list",
+				columns:[{name:"id"},{name:"code",display:"字典代码"},{name:"name",display:"字典名称"}],
+				formatData:function(data){return data.result;},
+				title:"字典",
+				rowId:"id",
+				buttons:[
+				         {
+				        	 text:"增加字典项",
+				        	 name:'addBtn',
+				        	 click:addDictionary,
+				        	 action:'add'
+				         },
+				         {
+				        	 text:"增加字典参数",
+				        	 name:'addDicParamBtn',
+				        	 click:addDicParam,
+				        	 action:'addDicParam'
+						 },
+						 {
+							 text:"删除字典",
+							 name:'deleteBtn',
+							 click:removeDictionary,
+							 action:'delete'
+						 },
+						 {
+							 text:"编辑字典",
+							 name:'editBtn',
+							 click:editDictionary
+						 }
+				         ]
+			});
+			
+		});

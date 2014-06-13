@@ -1,5 +1,8 @@
 package org.moon.dictionary.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.moon.base.service.AbstractService;
 import org.moon.dictionary.domain.Dictionary;
 import org.moon.dictionary.service.DictionaryService;
@@ -15,11 +18,8 @@ public class DictionaryServiceImpl extends AbstractService<Dictionary> implement
 	}
 
 	@Override
-	public Dictionary load(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Map<String,Object>> list(){
+		return super.list();
 	}
-	
-	
 	
 }

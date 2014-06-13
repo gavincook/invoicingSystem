@@ -26,7 +26,7 @@ public class Pager implements PagedList<Map<String,Object>>{
 	/**
 	 * 总记录数
 	 */
-	private Long totalItemsCount;
+	private int totalItemsCount;
 
 	/**
 	 * 分页大小
@@ -55,7 +55,7 @@ public class Pager implements PagedList<Map<String,Object>>{
 	 */
 	private Map<String,Object> paramsMap = ParamUtils.getDefaultParamMap();
 	
-	public Pager(Long totalItemsCount,List<Map<String,Object>> items,Map<String,Object> paramsMap){
+	public Pager(int totalItemsCount,List<Map<String,Object>> items,Map<String,Object> paramsMap){
 		this.totalItemsCount = totalItemsCount;
 		this.items = items;
 		if(paramsMap!=null){
@@ -81,10 +81,7 @@ public class Pager implements PagedList<Map<String,Object>>{
 
 	@Override
 	public int getTotalItemCount() {
-		if(totalPagesCount<=0)
-		return 0;
-		else
-			return totalPagesCount;
+			return totalItemsCount;
 	}
 
 

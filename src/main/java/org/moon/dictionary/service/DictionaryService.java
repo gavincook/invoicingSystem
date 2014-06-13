@@ -8,6 +8,6 @@ import org.moon.dictionary.domain.Dictionary;
 
 public interface DictionaryService extends BaseService<Dictionary>{
 
-	public List<Map> list();
+	public List<Map<String,Object>> list();
 	
 }

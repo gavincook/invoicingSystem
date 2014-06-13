@@ -10,6 +10,7 @@ import org.moon.base.repository.CommonRepository;
 import org.moon.core.orm.mybatis.Criteria;
 import org.moon.core.orm.mybatis.criterion.Restrictions;
 import org.moon.core.spring.ApplicationContextHelper;
+import org.moon.pagination.Pager;
 import org.springframework.util.Assert;
 
 /**
@@ -40,11 +41,11 @@ public abstract class AbstractService<T> implements BaseService<T>{
 		}
 	}
 	
-	public List<Map> list(){
+	public List<Map<String,Object>> list(){
 		return repository.list(getGeneric(),null);
 	}
 	
-	public List<Map> list(Criteria criteria){
+	public List<Map<String,Object>> list(Criteria criteria){
 		return repository.list(getGeneric(),criteria);
 	}
 	
@@ -56,4 +57,16 @@ public abstract class AbstractService<T> implements BaseService<T>{
 	}
 	
 	
+	public Pager listForPage(Criteria criteria){
+		Pager pager = new Pager(repository.count(getGeneric(), criteria), repository.list(getGeneric(),criteria), null);
+		return pager;
+	}
+	
+	public int count(Criteria criteria){
+		return repository.count(getGeneric(), criteria);
+	}
+	
+	public void delete(Long[] ids){
+		 repository.delete(getGeneric(), ids);
+	}
 }

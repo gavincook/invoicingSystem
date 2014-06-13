@@ -16,7 +16,7 @@ public final class SimpleCriterion implements Criterion,Serializable{
 	
 	@Override
 	public String toSqlString() {
-		return sqlString;
+		return this.sqlString;
 	}
 
 	public  SimpleCriterion(String name,String op,Object value){

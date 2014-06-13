@@ -253,7 +253,7 @@
 					dataType:'json',
 					data:$.extend({_random:Math.random()},{pageIndex:opts.pageIndex,pageSize:opts.pageSize},opts.params)
 				}).done(function(data){
-					opts.total = data.total||data.length;
+					opts.total = data.total||data.totalItemCount;
 					if($.isFunction(opts.formatData)){
 						data = opts.formatData.call(this,data);
 					}

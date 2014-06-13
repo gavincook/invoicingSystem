@@ -25,12 +25,13 @@ public class Criteria implements Serializable {
 	
 	private Collection<Order> orders = new ArrayList<Order>();
 	
-	private int offset = 0 ,limit = -1;
+	private int offset = 0 ,limit = -1,currentPage = -1;
 	
 	private boolean statusChanged = false;//标示Criteria中是否有状态发生变化，如果发生了变化，toSqlString()需要重新构建sql语句，否则直接返回已有的sql语句
 	
 	private String sqlString = "";
 	
+	private String limitSql = "";
 	private boolean empty = true;//标示是否有限制条件
 	
 	public Criteria add(Criterion criterion) {
@@ -41,6 +42,12 @@ public class Criteria implements Serializable {
 
 	public Criteria offset(int offset){
 		this.offset = offset;
+		triggerStatusChange();
+		return this;
+	}
+	
+	public Criteria currentPage(int currentPage){
+		this.currentPage = currentPage;
 		triggerStatusChange();
 		return this;
 	}
@@ -64,6 +71,10 @@ public class Criteria implements Serializable {
 		}else{
 			return sqlString;
 		}
+	}
+	
+	public String toLimitSqlString(){
+		return limitSql;
 	}
 	
 	public boolean isEmpty(){
@@ -104,8 +115,11 @@ public class Criteria implements Serializable {
 				}
 			}));
 		}
+		if(offset<=0){
+			offset = (currentPage-1)*limit; 
+		}
 		if(limit!=-1){//当limit大于0时(不等于初始值)，才加limit后缀
-			sql.append(" ").append(applicationContext.getBean(Dialect.class).getLimitSql(offset, limit));
+			limitSql = " "+applicationContext.getBean(Dialect.class).getLimitSql(offset, limit);
 		}
 		sqlString =  sql.toString();
 		statusChanged = false;

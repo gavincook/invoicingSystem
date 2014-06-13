@@ -8,8 +8,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import org.moon.core.spring.ApplicationContextHelper;
-import org.moon.dictionary.domain.Dictionary;
-import org.moon.dictionary.repository.DictionaryRepository;
 import org.moon.dictionary.service.DictionaryService;
 
 /**
@@ -49,7 +47,7 @@ public class DictionarySelect extends TagSupport{
 		return EVAL_PAGE;
 	}
 	
-	private List<Map> getDicForCode(){
+	private List<Map<String,Object>> getDicForCode(){
 		return dictionaryService.list();
 	}
 	

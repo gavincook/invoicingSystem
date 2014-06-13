@@ -43,8 +43,7 @@ public class SQLProvider {
 		final BaseDomain bd = (BaseDomain) params.get("o");
 		final SQL sql = new SQL().INSERT_INTO(getTable(bd.getClass()));
 		String sqlString;
-		
-		ReflectionUtils.doWithFields(Dictionary.class, new FieldCallback() {
+		ReflectionUtils.doWithFields(bd.getClass(), new FieldCallback() {
 			@Override
 			public void doWith(Field field) throws IllegalArgumentException,
 					IllegalAccessException {
@@ -71,7 +70,7 @@ public class SQLProvider {
 		final SQL sql = new SQL().UPDATE(getTable(bd.getClass()));
 		String sqlString;
 		
-		ReflectionUtils.doWithFields(Dictionary.class, new FieldCallback() {
+		ReflectionUtils.doWithFields(bd.getClass(), new FieldCallback() {
 			@Override
 			public void doWith(Field field) throws IllegalArgumentException,
 					IllegalAccessException {
@@ -135,12 +134,28 @@ public class SQLProvider {
 		if(Objects.nonNull(criteria)&&criteria.nonEmpty()){
 			sql.WHERE(criteria.toSqlString());
 		}
+		System.out.println(sql.toString());
+		sqlString = sql.toString()+criteria.toLimitSqlString();
+		logger.debug("{} : {}" ,logger.getName(), sqlString);
+		return sqlString;
+	}
+
+	public String count(Map<String, Object> params) {
+		Class domainClass = (Class<? extends BaseDomain>) params.get("domain");
+		Criteria criteria = (Criteria) params.get("criteria");
+		String tableName = getTable(domainClass);
+		String sqlString;
+		SQL sql = new SQL().SELECT("count(*)").FROM(tableName);
+		
+		if(Objects.nonNull(criteria)&&criteria.nonEmpty()){
+			sql.WHERE(criteria.toSqlString());
+		}
 		
 		sqlString = sql.toString();
 		logger.debug("{} : {}" ,logger.getName(), sqlString);
 		return sqlString;
 	}
-
+	
 	/**
 	 * 
 	 * @param params

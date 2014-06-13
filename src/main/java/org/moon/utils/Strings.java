@@ -87,7 +87,7 @@ public class Strings {
 			return "";
 		}
 		if(o instanceof String||o instanceof Character){
-			return "'"+"'";
+			return "'"+o+"'";
 		}
 		return o.toString();
     }
@@ -145,9 +145,9 @@ public class Strings {
     		if(begin){
     			begin = false;
     		}else{
-    			sb.append(handler.handle(o));
+    			sb.append(delimiter);
     		}
-    		sb.append(delimiter);
+    		sb.append(handler.handle(o));
     	}
     	return sb.toString();
     }

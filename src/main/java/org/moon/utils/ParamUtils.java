@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.moon.core.orm.mybatis.Criteria;
+
 /**
  * the util for parameter
  * @author Gavin
@@ -43,6 +45,21 @@ public class ParamUtils {
 		return paramMap;
 	}
  
+	
+	public static Criteria getParamsAsCerteria(HttpServletRequest request){
+		Criteria criteria = new Criteria();
+		String page =request.getParameter("pageIndex");
+		if(page!=null){
+			criteria.currentPage(Integer.parseInt(page));
+		}
+		
+		String pageSize = request.getParameter("pageSize");
+		if(pageSize!=null){
+			criteria.limit(Integer.parseInt(pageSize));
+		}
+		return criteria;
+	}
+	
 	public static void main(String[] args){
 		 Map<String,Object> m = new HashMap<String,Object>();
 		 System.out.println(m.get("key"));

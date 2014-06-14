@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <m:require src="common,ev,zt,js/ztree.extend.js,table,dialog,noty,font,{department/department}"></m:require>
-<title>用户管理</title>
+<title>部门管理</title>
 </head>
 <body style="margin:0;">
 <!-- 用户列表 -->

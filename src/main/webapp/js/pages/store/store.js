@@ -1,15 +1,15 @@
 
 var table;
 $(function(){
-	table = $("#departmentTable").table({
-		url:contextPath+"/department/list",
-		columns:[{name:"id"},{name:"name",display:"部门名称"}],
+	table = $("#storeTable").table({
+		url:contextPath+"/store/list",
+		columns:[{name:"name",display:"商品名"},{name:'price',display:'单价'},{name:'number',display:'数量'}],
 		formatData:function(data){return data.items;},
-		title:"部门列表",
+		title:"商品列表",
 		rowId:"id",
 		buttons:[
 		         {
-		        	 text:"增加部门",
+		        	 text:"增加商品",
 		        	 click:btnHandler,
 		        	 name:'addBtn'
 		         },
@@ -34,28 +34,28 @@ var temp = [];
 function btnHandler(btnTest){
 	btnTest = btnTest.name;
 	if(btnTest=='addBtn'){//添加
-		$('#departmentForm').reset();
-		$('#departmentForm').dialog({
-			title:"添加一个部门",
+		$('#storeForm').reset();
+		$('#storeForm').dialog({
+			title:"添加一个商品",
 			afterShown:function(){
-				$("#departmentForm").validate({align:'right',theme:"darkblue"});
+				$("#storeForm").validate({align:'right',theme:"darkblue"});
 			},
 			beforeClose:function(){
-				$("#departmentForm").validate("hide");
+				$("#storeForm").validate("hide");
 			},
 			buttons:[
 			         {
 			        	 text : "保存",
 			        	 css  : "btn btn-primary",
 			        	 click:function(){
-			        		 $("#departmentForm").validate("validate").done(function(result){
+			        		 $("#storeForm").validate("validate").done(function(result){
 			        			 if(result){
-			        				 $("#departmentForm").ajaxSubmitForm(contextPath+"/department/add","",
+			        				 $("#storeForm").ajaxSubmitForm(contextPath+"/store/add","",
 					        				 function(){
-					 			        		 $("#departmentForm").dialog("close");
-					 			        		 $("#departmentTable").table("refresh");
-					 			        		 $("#departmentForm").reset();
-					 			        		 moon.success("部门添加成功");
+					 			        		 $("#storeForm").dialog("close");
+					 			        		 $("#storeTable").table("refresh");
+					 			        		 $("#storeForm").reset();
+					 			        		 moon.success("商品添加成功");
 					 			        	 },
 					 			        	 function(){moon.error("失败");}
 					 			     );
@@ -67,7 +67,7 @@ function btnHandler(btnTest){
 			        	 text  : "取消",
 			        	 css   : "btn",
 			        	 click : function(){
-			        		 $("#departmentForm").dialog("close");
+			        		 $("#storeForm").dialog("close");
 			        	 }
 			         }
 			         ]
@@ -80,29 +80,31 @@ function btnHandler(btnTest){
 		}
 		var id = selectRows[0].id;
 		var name = selectRows[0].name;
-		$(":text","#departmentForm").val(name);
-		$('#departmentForm').dialog({
-			title:"编辑部门",
+		$("[name$='name']","#storeForm").val(name);
+		$("[name$='price']","#storeForm").val(selectRows[0].price);
+		$("[name$='number']","#storeForm").val(selectRows[0].number);
+		$('#storeForm').dialog({
+			title:"编辑商品",
 			afterShown:function(){
-				$("#departmentForm").validate({align:'right',theme:"darkblue",model:"update"});
+				$("#storeForm").validate({align:'right',theme:"darkblue",model:"update"});
 			},
 			beforeClose:function(){
-				$("#departmentForm").validate("hide");
+				$("#storeForm").validate("hide");
 			},
 			buttons:[
 			         {
 			        	 text : "保存",
 			        	 css  : "btn btn-primary",
 			        	 click:function(){
-			        		 $("#departmentForm").validate("validate").done(function(result){
+			        		 $("#storeForm").validate("validate").done(function(result){
 			        			 if(result){
-					        		 $("#departmentForm").ajaxSubmitForm(contextPath+"/department/update",
-						        			 {"department.id":id},
+					        		 $("#storeForm").ajaxSubmitForm(contextPath+"/store/update",
+						        			 {"store.id":id},
 					        				 function(){
-					 			        		 $("#departmentForm").dialog("close");
+					 			        		 $("#storeForm").dialog("close");
 					 			        		 table.refresh();
-					 			        		 $("#departmentForm").reset();
-					 			        		 moon.success("修改部门成功");
+					 			        		 $("#storeForm").reset();
+					 			        		 moon.success("修改商品成功");
 					 			        	 },
 					 			        	 function(){moon.error("失败");}
 					 			     );
@@ -114,7 +116,7 @@ function btnHandler(btnTest){
 			        	 text  : "取消",
 			        	 css   : "btn",
 			        	 click : function(){
-			        		 $("#departmentForm").dialog("close");
+			        		 $("#storeForm").dialog("close");
 			        	 }
 			         }
 			         ]
@@ -131,7 +133,7 @@ function btnHandler(btnTest){
 			   ids+="&ids="+e.id;
 		   });
 		   ids = ids.substring(1);
-		   $.post(contextPath+"/department/delete",ids,function(result){
+		   $.post(contextPath+"/store/delete",ids,function(result){
 			   table.refresh();
 		  });
 		}
@@ -178,17 +180,17 @@ function filter(treeId, parentNode, childNodes) {
 	return childNodes;
 }
  
-function isDepartmentNameExists(field,type,opts){
+function isStoreNameExists(field,type,opts){
 	console.log(opts.model);
 	if(opts.model=="update"){
 		return "";
 	}else{
 		var dfd = $.Deferred();
-		$.getJsonData(contextPath+"/department/check",{name:field.val()},{type:"Post"}).done(function(result){
+		$.getJsonData(contextPath+"/store/check",{name:field.val()},{type:"Post"}).done(function(result){
 			if(result.result){
 				dfd.resolve("");
 			}else{
-				dfd.resolve("部门已经存在.<br/>");
+				dfd.resolve("商品已经存在.<br/>");
 			}
 		});
 		return dfd.promise();

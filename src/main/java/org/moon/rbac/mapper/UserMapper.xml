@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.moon.rbac.repository.UserRepository">
 	<select id="get" resultMap="user">
-		select * from tab_user where id = #{id}
+		SELECT u.*,d.name AS department_name FROM tab_user u LEFT JOIN im_department d ON u.department_id = d.id WHERE u.id = #{id}
 	</select>
 
 	<select id="login" resultType="Long" parameterType="org.moon.rbac.domain.User">
@@ -43,9 +43,9 @@
 
 	<insert id="addUser" parameterType="org.moon.rbac.domain.User"
 		useGeneratedKeys="true" keyProperty="user.id" keyColumn="id">
-		insert tab_user(user_name,password,real_name,create_by,delete_flag,create_time)
+		insert tab_user(user_name,password,real_name,create_by,delete_flag,create_time,department_id)
 		values(
-			#{user.userName},#{user.password},#{user.realName},#{user.createBy},false,now()
+			#{user.userName},#{user.password},#{user.realName},#{user.createBy},false,now(),#{user.departmentId}
 		)
 
 	</insert>
@@ -53,6 +53,7 @@
 	<update id="updateUser" parameterType="org.moon.rbac.domain.User">
 		update tab_user set
 		user_name=#{user.userName},password=#{user.password},
+		department_id=#{user.departmentId},
 		real_name=#{user.realName},delete_flag = #{user.deleteFlag} where
 		id=#{user.id}
 	</update>
@@ -83,5 +84,7 @@
 		<result column="real_name" property="realName" />
 		<result column="delete_flag" property="deleteFlag" />
 		<result column="create_time" property="createTime" />
+		<result column="department_name" property="departmentName" />
+		<result column="department_id" property="departmentId" />
 	</resultMap>
 </mapper>

@@ -30,6 +30,16 @@
   	<span class="label-text">真实姓名:</span>
   	<input class="form-control" type="text" name="user.realName" validate="validate[required]"/>
   </div>
+    <div class="form-group">
+  	<span class="label-text">部门:</span>
+  	<select name="user.departmentId">
+  	<c:forEach items="${departments}" var="d">
+  		<option value="${d.id}">
+  			${d.name }
+  		</option>
+  	</c:forEach>
+  	</select>
+  </div>
 </form>
      <!-- 角色分配 -->
      <div id="roleTree" class="ztree" style="display:none;">  </div>

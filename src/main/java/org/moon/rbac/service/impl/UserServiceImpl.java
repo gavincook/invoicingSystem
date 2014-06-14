@@ -141,8 +141,9 @@ public class UserServiceImpl implements UserService {
         if (user == null || user.getId() == null)
             return false;
         User oldUser = get(user.getId());
-        oldUser = (User) ClassPropertiesUtil.copyProperties(user, oldUser, true, "userName", "password", "realName");
+        oldUser = (User) ClassPropertiesUtil.copyProperties(user, oldUser, true, "userName", "password", "realName","departmentId");
         oldUser.updateUser();
+        modelContainer.removeModel(ModelUtils.asModelKey(User.class, oldUser.getId()));
         return true;
 
     }

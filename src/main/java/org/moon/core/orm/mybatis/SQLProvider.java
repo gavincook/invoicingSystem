@@ -13,7 +13,6 @@ import javax.persistence.Transient;
 
 import org.apache.ibatis.jdbc.SQL;
 import org.moon.base.domain.BaseDomain;
-import org.moon.dictionary.domain.Dictionary;
 import org.moon.utils.Iterators;
 import org.moon.utils.Objects;
 import org.moon.utils.Strings;
@@ -134,8 +133,10 @@ public class SQLProvider {
 		if(Objects.nonNull(criteria)&&criteria.nonEmpty()){
 			sql.WHERE(criteria.toSqlString());
 		}
-		System.out.println(sql.toString());
-		sqlString = sql.toString()+criteria.toLimitSqlString();
+		sqlString = sql.toString();
+		if(Objects.nonNull(criteria)&&criteria.nonEmpty()){
+			sqlString+=criteria.toLimitSqlString();
+		}
 		logger.debug("{} : {}" ,logger.getName(), sqlString);
 		return sqlString;
 	}

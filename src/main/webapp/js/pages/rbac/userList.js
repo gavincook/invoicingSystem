@@ -3,7 +3,7 @@ var table;
 $(function(){
 	table = $("#userTable").table({
 		url:contextPath+"/user/getUsersData",
-		columns:[{name:"id"},{name:"user_name",display:"用户名"},{name:"role_name",display:"角色名"}],
+		columns:[{name:"id"},{name:"user_name",display:"用户名"},{name:"department_name",display:"部门"}],
 		formatData:function(data){return data.rows;},
 		title:"用户列表",
 		rowId:"id",

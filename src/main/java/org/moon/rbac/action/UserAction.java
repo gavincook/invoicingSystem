@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.moon.base.action.BaseAction;
+import org.moon.invocing.repository.DepartmentRepository;
+import org.moon.invocing.service.DepartmentService;
 import org.moon.log.domain.Log;
 import org.moon.log.service.LogService;
 import org.moon.rbac.domain.Role;
@@ -39,6 +41,9 @@ public class UserAction extends BaseAction{
 	
 	@Resource
 	private LogService logService;
+	
+	@Resource
+	private DepartmentService departmentService;
 	/**
 	 * 显示登录页面
 	 * @return
@@ -78,7 +83,7 @@ public class UserAction extends BaseAction{
 	 @RequestMapping("")
 	 @PermissionMapping(code="000008",name="用户列表")
 	 public ModelAndView userList(HttpServletRequest request){
-		 return new ModelAndView("pages/rbac/userList");
+		 return new ModelAndView("pages/rbac/userList").addObject("departments",departmentService.list());
 	 }
 	 
 	 @PermissionMapping(code="000001",name="用户列表")

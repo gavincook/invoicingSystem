@@ -118,7 +118,7 @@ $.fn.reset = function(){
  * 自动填充表单
  */
 	$.fn.autoCompleteForm = function(url,data,exclude){
-		var inputs = $(':input',this) .not(':button, :submit, :reset,[name="repassword"]');
+		var inputs = $(':input,select',this) .not(':button, :submit, :reset,[name="repassword"]');
 		$.ajax({
 			url:url,
 			data:data,
@@ -134,8 +134,9 @@ $.fn.reset = function(){
 					}else{
 						temp =response[name];
 					}
-					if(typeof(temp)!="undefined"&&temp!=null&&temp!="null")
+					if(typeof(temp)!="undefined"&&temp!=null&&temp!="null"){
 						$(e).val(temp);
+					}
 				});
 				
 				

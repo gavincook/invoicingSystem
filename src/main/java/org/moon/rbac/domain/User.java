@@ -77,6 +77,10 @@ public class User extends BaseDomain{
 	 */
 	private String contact;
 	
+	private Long departmentId;
+	
+	private String departmentName;
+	
 	/**
 	 * 密码是否加密
 	 */
@@ -98,6 +102,8 @@ public class User extends BaseDomain{
 		Map<String,Object> m = new HashMap<String,Object>();
 		m.put("id", getId());
 		m.put("user_name", getUserName());
+		m.put("department_id", departmentId);
+		m.put("department_name", departmentName);
 		if(roleId==null||getRole()==null){
 			m.put("role_name", "还未分配角色");
 		}else{
@@ -118,6 +124,8 @@ public class User extends BaseDomain{
 		}
 		m.put("password", password);
 		m.put("realName", realName);
+		m.put("departmentId", departmentId);
+		m.put("departmentName", departmentName);
 		return m;
 	}
 	
@@ -285,5 +293,21 @@ public class User extends BaseDomain{
 	public void setCreateBy(Long createBy) {
 		this.createBy = createBy;
 	}
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
 	/******************** /setter/getter  ********************/
+
+	public Long getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(Long departmentId) {
+		this.departmentId = departmentId;
+	}
 }

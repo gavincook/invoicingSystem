@@ -31,7 +31,7 @@
    <form id="loginForm" class="loginForm">
      <div class="form-inline">
      	<i class="fa fa-user input-icon"></i>
-     	<input type="text" name="user.userName" value="system_user" validate="validate[minsize(6),maxsize(15)]" errMsg="用户名为6~15个字符"/>
+     	<input type="text" name="user.userName" value="system_user" validate="validate[minsize(2),maxsize(15)]" errMsg="用户名为2~15个字符"/>
      </div>
      <div class="form-inline">
      	<i class="fa fa-lock input-icon"></i>

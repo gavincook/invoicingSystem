@@ -216,7 +216,6 @@ function assignPermission(){
 	});   
 	$("#permissionTable").dialog({
 		title:'分配权限',
-		width:480,
 		buttons:[
 		         {
 					text:'确定',

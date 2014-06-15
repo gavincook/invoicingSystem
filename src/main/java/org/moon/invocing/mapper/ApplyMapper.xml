@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="org.moon.invocing.repository.ApplyRepository">
+	<select id="listData" resultType="HashMap">
+		SELECT a.*,u.user_name,s.name
+		FROM im_apply a
+		JOIN im_store s ON a.store_id = s.id
+		LEFT JOIN tab_user u ON u.id = a.user_id
+	</select>
+	
+	<update id="changeStatus">
+		UPDATE im_apply set status=#{status} where id=#{id}
+	</update>
+	
+	<select id="checkRemaind" resultType="Integer">
+		SELECT s.number-a.apply_number AS remaind
+		FROM im_apply a
+		JOIN im_store s ON a.store_id = s.id
+		WHERE a.id = #{id}
+	</select>
+	
+	<update id="agree">
+		UPDATE im_store s
+		JOIN im_apply a
+		ON s.id = a.store_id AND a.id = #{id}
+		SET number = number-a.apply_number
+	</update>
+</mapper>

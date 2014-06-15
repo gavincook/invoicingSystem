@@ -124,11 +124,13 @@ public class Role extends BaseDomain{
         }
 		StringBuilder path = new StringBuilder();
 		List<Long> pathList = new ArrayList<Long>();
-		Role temp = (Role) roleEvent.get(getParentId()).getEventResult();
 		pathList.add(getId());
-		while(temp!=null){
-			pathList.add(temp.getId());
-			temp = (Role) roleEvent.get(temp.getParentId()).getEventResult(); 
+		if(getParentId()!=null){
+			Role temp = (Role) roleEvent.get(getParentId()).getEventResult();
+			while(temp!=null){
+				pathList.add(temp.getId());
+				temp = (Role) roleEvent.get(temp.getParentId()).getEventResult(); 
+			}
 		}
 		for(int i = pathList.size()-1;i>=0;i--){
 			path.append(","+pathList.get(i));

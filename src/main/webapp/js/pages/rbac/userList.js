@@ -1,5 +1,33 @@
 
 var table;
+
+var i= 1;
+var userZtree;
+var znodes = [{name:'角色管理',id:-1,isParent:true}];
+
+var setting = {
+        data: {  
+            simpleData: {  
+                enable: true  
+            }  
+        },
+		async: {
+			enable: true,
+			url:contextPath+"/role/getRoleData",
+			autoParam:["id"],
+			dataType:'json',
+			dataFilter: filter
+		},
+		callback:{
+			onAsyncSuccess :function(){
+				i = userZtree.selectNodebyTreepath("uid",temp,i);
+			},
+			onExpand : function(){
+				i = userZtree.selectNodebyTreepath("uid",temp,i);
+			}
+		}
+}; 
+
 $(function(){
 	table = $("#userTable").table({
 		url:contextPath+"/user/getUsersData",
@@ -33,8 +61,8 @@ $(function(){
 	
 
 	$.fn.zTree.init($("#roleTree"), setting,znodes);
-	ztree = $.fn.zTree.getZTreeObj("roleTree");
-	ztree.reAsyncChildNodes(ztree.getNodes()[0]);
+	userZtree = $.fn.zTree.getZTreeObj("roleTree");
+	userZtree.reAsyncChildNodes(userZtree.getNodes()[0]);
 
 });
 		
@@ -151,15 +179,15 @@ function btnHandler(btnTest){
 		var uid = selectRows[0].id;
 		 $.postData(contextPath+"/user/getRolePath",{uid:uid},function(result){
 			
-			 ztree.expandNode(ztree.getNodes()[0],true);
+			 userZtree.expandNode(userZtree.getNodes()[0],true);
 			// alert(result.path);
 			 if(result.path)
 			 {
 			 temp = result.path.split(",");
 			 if(temp.length!=1)
-				 ztree.asyncOrExpandNode(ztree.getNodeByParam("uid",temp[0]),true);
+				 userZtree.asyncOrExpandNode(userZtree.getNodeByParam("uid",temp[0]),true);
 			 else{
-				 ztree.selectNode(ztree.getNodeByParam("uid",temp[0]));
+				 userZtree.selectNode(userZtree.getNodeByParam("uid",temp[0]));
 				 i = 1;
 			 }
 			 }
@@ -174,19 +202,19 @@ function btnHandler(btnTest){
 				   text:'确定',
 				   css : "btn btn-primary",
 				   click:function(){
-					   if(ztree.getSelectedNodes().length!=1){
+					   if(userZtree.getSelectedNodes().length!=1){
 						   moon.warn("请选择一个角色进行分配");
 						   return false;
 					   }
 					  $.post(contextPath+"/role/assignRoleToUser",
 							  {uid:uid,
-						       rid:ztree.getSelectedNodes()[0].id},
+						       rid:userZtree.getSelectedNodes()[0].id},
 						       function(result){
 						    	   moon.info("角色分配成功");
 						    	   table.refresh();
 						    	   $("#roleTree").dialog("close");
-						    	   ztree.cancelSelectedNode(ztree.getSelectedNodes[0]);
-								   ztree.expandAll(false);
+						    	   userZtree.cancelSelectedNode(userZtree.getSelectedNodes[0]);
+								   userZtree.expandAll(false);
 						       }
 					  );
 				   }
@@ -202,33 +230,6 @@ function btnHandler(btnTest){
 		 
 	}
 };
-
-var i= 1;
-var ztree;
-var znodes = [{name:'角色管理',id:-1,isParent:true}];
-
-var setting = {
-        data: {  
-            simpleData: {  
-                enable: true  
-            }  
-        },
-		async: {
-			enable: true,
-			url:contextPath+"/role/getRoleData",
-			autoParam:["id"],
-			dataType:'json',
-			dataFilter: filter
-		},
-		callback:{
-			onAsyncSuccess :function(){
-				i = ztree.selectNodebyTreepath("uid",temp,i);
-			},
-			onExpand : function(){
-				i = ztree.selectNodebyTreepath("uid",temp,i);
-			}
-		}
-}; 
 
 function filter(treeId, parentNode, childNodes) {
 	if (!childNodes) 

@@ -1,6 +1,6 @@
 $(function(){
 	//登录页面欢迎信息
-	moon.info("Welcome to Moon!","top");
+	moon.info("欢迎使用进销存管理系统!","top");
 	
 	//登录动作
 	$("#submit").click(function(){
@@ -24,7 +24,7 @@ $(function(){
 	
 	//页面动画
 	$(".form-container").animate({
-		"margin-top":"-120px"
+		"margin-top":"-150px"
 	},2000,"linear",function(){
 		$(".system-info-container").animate({
 			"margin-left":0

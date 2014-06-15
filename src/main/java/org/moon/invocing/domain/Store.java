@@ -18,6 +18,7 @@ public class Store extends BaseDomain{
 	
 	private Integer number;
 	
+	private Integer maxnumber;
 	
 	public String getName() {
 		return name;
@@ -41,6 +42,14 @@ public class Store extends BaseDomain{
 
 	public void setNumber(Integer number) {
 		this.number = number;
+	}
+
+	public Integer getMaxnumber() {
+		return maxnumber;
+	}
+
+	public void setMaxnumber(Integer maxnumber) {
+		this.maxnumber = maxnumber;
 	}
 	
 	

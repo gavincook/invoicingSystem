@@ -26,6 +26,10 @@
   	<span class="label-text">商品数量:</span>
   	<input type="text" class="form-control" name="store.number"/>
   </div>
+  <div class="form-group">
+  	<span class="label-text">最大预定数量:</span>
+  	<input type="text" class="form-control" name="store.maxnumber"/>
+  </div>
 </form>
 </body>
 </html>

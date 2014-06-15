@@ -118,9 +118,12 @@ function checkStore(){
 	var $applyNumber = $("[name='apply.applyNumber']");
 	$.getJsonData(contextPath+"/apply/check",{id:$("[name='apply.storeId']").val()},{type:"Post"}).done(function(result){
 		var number = result.result[0];
+		var maxnumber = number.maxnumber||0;
 		number=number.number||0;
 		if($applyNumber.val()>number){
 			dfd.resolve("申请数量不能超过存库量 "+number+".<br/>");
+		}else if($applyNumber.val()>maxnumber){
+			dfd.resolve("申请数量不能超过最大预约量 "+maxnumber+".<br/>");
 		}else{
 			dfd.resolve("");
 		}

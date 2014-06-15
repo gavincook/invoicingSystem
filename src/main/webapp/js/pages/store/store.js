@@ -3,7 +3,10 @@ var table;
 $(function(){
 	table = $("#storeTable").table({
 		url:contextPath+"/store/list",
-		columns:[{name:"name",display:"商品名"},{name:'price',display:'单价'},{name:'number',display:'数量'}],
+		columns:[{name:"name",display:"商品名"},
+		         {name:'price',display:'单价'},
+		         {name:'number',display:'库存数量'},
+		         {name:'maxnumber',display:'最大预约数量'}],
 		formatData:function(data){return data.items;},
 		title:"商品列表",
 		rowId:"id",

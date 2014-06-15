@@ -32,6 +32,8 @@ public class Criteria implements Serializable {
 	private String sqlString = "";
 	
 	private String limitSql = "";
+	
+	private String orderSql = "";
 	private boolean empty = true;//标示是否有限制条件
 	
 	public Criteria add(Criterion criterion) {
@@ -77,6 +79,10 @@ public class Criteria implements Serializable {
 		return limitSql;
 	}
 	
+	public String toOrderSqlString(){
+		return orderSql;
+	}
+	
 	public boolean isEmpty(){
 		return empty;
 	}
@@ -106,9 +112,9 @@ public class Criteria implements Serializable {
 		}));
 		
 		if(orders.size()>0){
-			sql.append(" order by ");
+			orderSql = (" order by ");
 			
-			sql.append(Strings.join(orders, " , ",new Strings.StringCustomerHandler<Order>() {
+			orderSql+=(Strings.join(orders, " , ",new Strings.StringCustomerHandler<Order>() {
 				@Override
 				public String handle(Order o) {
 					return o.toSqlString();
@@ -124,5 +130,17 @@ public class Criteria implements Serializable {
 		sqlString =  sql.toString();
 		statusChanged = false;
 		return sqlString;
+	}
+
+	public String getSqlString() {
+		return sqlString;
+	}
+
+	public String getLimitSql() {
+		return limitSql;
+	}
+
+	public String getOrderSql() {
+		return orderSql;
 	}
 }

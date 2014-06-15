@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="org.moon.invocing.repository.ApplyRepository">
-	<select id="listData" resultType="HashMap">
+	<select id="listData" resultType="HashMap" parameterType="org.moon.core.orm.mybatis.Criteria">
 		SELECT a.*,u.user_name,s.name
 		FROM im_apply a
 		JOIN im_store s ON a.store_id = s.id
 		LEFT JOIN tab_user u ON u.id = a.user_id
+		WHERE ${criteria.sqlString} ${criteria.orderSql}  ${criteria.limitSql} 
+	</select>
+	
+	<select id="countData" resultType="Integer" parameterType="org.moon.core.orm.mybatis.Criteria">
+		SELECT count(*)
+		FROM im_apply s
+		WHERE ${criteria.sqlString}
 	</select>
 	
 	<update id="changeStatus">

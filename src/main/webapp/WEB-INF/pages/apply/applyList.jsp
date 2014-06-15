@@ -10,6 +10,9 @@
 </head>
 <body style="margin:0;">
 <!-- 用户列表 -->
+	<div class="form-group">
+		<input type="text" placeholder="申领人"/>
+	</div>
      <div id="applyTable"></div> 
      
      <!-- Modal -->

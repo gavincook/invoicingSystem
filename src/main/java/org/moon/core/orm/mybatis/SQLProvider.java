@@ -135,6 +135,7 @@ public class SQLProvider {
 		}
 		sqlString = sql.toString();
 		if(Objects.nonNull(criteria)&&criteria.nonEmpty()){
+			sqlString+=criteria.toOrderSqlString();
 			sqlString+=criteria.toLimitSqlString();
 		}
 		logger.debug("{} : {}" ,logger.getName(), sqlString);

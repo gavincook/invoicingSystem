@@ -3,12 +3,12 @@ var table;
 $(function(){
 	table = $("#applyTable").table({
 		url:contextPath+"/apply/list",
-		columns:[{name:"name",display:"商品名"},
-				 {name:'apply_number',display:'申请数量'},
-				 {name:'user_name',display:'申请人',render:function(rowData){
+		columns:[{name:"name",display:"商品名",sort:true},
+				 {name:'apply_number',display:'申请数量',sort:true},
+				 {name:'user_name',display:'申请人',sort:true,render:function(rowData){
 					 return rowData.user_name||"系统管理员";
 				 }},
-				 {name:'apply_date',display:'申请日期',render:function(rowData){
+				 {name:'apply_date',display:'申请日期',sort:true,render:function(rowData){
 					 var date = new Date();
 					 date.setTime(rowData.apply_date);
 					 return date.getFullYear()+"-"+(date.getMonth()+1)+"-"

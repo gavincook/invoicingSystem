@@ -22,7 +22,8 @@ public class ApplyService extends AbstractService<Apply>{
 
 	@Override
 	public Pager listForPage(Criteria criteria){
-		Pager pager = new Pager(applyRepository.count(getGeneric(), criteria),applyRepository.listData() , null);
+		criteria.toSqlString();
+		Pager pager = new Pager(applyRepository.countData(criteria),applyRepository.listData(criteria) , null);
 		return pager;
 	}
 }

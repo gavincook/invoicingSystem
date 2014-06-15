@@ -54,7 +54,7 @@ public class ApplyAction extends BaseAction {
 	@Get("/list")
 	public @ResponseBody Pager list(HttpServletRequest request){
 		Criteria criteria = ParamUtils.getParamsAsCerteria(request);
-		criteria.add(Restrictions.eq("delete_flag", false));
+		criteria.add(Restrictions.eq("s.delete_flag", false));
 		return  applyService.listForPage(criteria);
 	}
 	

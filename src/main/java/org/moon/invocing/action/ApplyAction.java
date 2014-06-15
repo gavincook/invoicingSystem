@@ -1,10 +1,14 @@
 package org.moon.invocing.action;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.moon.base.action.BaseAction;
 import org.moon.core.orm.mybatis.Criteria;
+import org.moon.core.orm.mybatis.criterion.MatchMode;
 import org.moon.core.orm.mybatis.criterion.Restrictions;
 import org.moon.invocing.domain.Apply;
 import org.moon.invocing.repository.ApplyRepository;
@@ -52,9 +56,21 @@ public class ApplyAction extends BaseAction {
 	}
 	
 	@Get("/list")
-	public @ResponseBody Pager list(HttpServletRequest request){
+	public @ResponseBody Pager list(HttpServletRequest request) throws UnsupportedEncodingException{
 		Criteria criteria = ParamUtils.getParamsAsCerteria(request);
-		criteria.add(Restrictions.eq("s.delete_flag", false));
+		criteria.add(Restrictions.eq("a.delete_flag", false));
+		if(request.getParameter("user_name")!=null){
+			criteria.add(Restrictions.like("u.user_name",URLDecoder.decode(request.getParameter("user_name"),"UTF-8"),MatchMode.ANYWHERE));
+		}
+		if(request.getParameter("store_name")!=null){
+			criteria.add(Restrictions.like("s.name", URLDecoder.decode(request.getParameter("store_name"),"UTF-8"),MatchMode.ANYWHERE));
+		}
+		if(request.getParameter("begin")!=null){
+			criteria.add(Restrictions.ge("a.apply_date", request.getParameter("begin")));
+		}
+		if(request.getParameter("end")!=null){
+			criteria.add(Restrictions.le("a.apply_date", request.getParameter("end")));
+		}
 		return  applyService.listForPage(criteria);
 	}
 	

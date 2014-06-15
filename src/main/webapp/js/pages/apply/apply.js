@@ -45,6 +45,15 @@ $(function(){
 		 });
 	 
 	});
+	
+	$("#query").click(function(){
+		var params = table.opts.params;
+		params["store_name"] = encodeURI($("[name='storeName']").val(),"UTF-8");
+		params["user_name"] =  encodeURI($("[name='applyUser']").val(),"UTF-8");
+		params["begin"]=$("[name='begin']").val()||'1900-01-01';
+		params["end"]=$("[name='end']").val()||'2999-12-31';
+		table.refresh();
+	});
 });
 		
 

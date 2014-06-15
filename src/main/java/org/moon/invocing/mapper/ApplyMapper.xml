@@ -11,7 +11,9 @@
 	
 	<select id="countData" resultType="Integer" parameterType="org.moon.core.orm.mybatis.Criteria">
 		SELECT count(*)
-		FROM im_apply s
+		FROM im_apply a
+		JOIN im_store s ON a.store_id = s.id
+		LEFT JOIN tab_user u ON u.id = a.user_id
 		WHERE ${criteria.sqlString}
 	</select>
 	

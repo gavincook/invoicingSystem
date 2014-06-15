@@ -17,7 +17,7 @@
 		<!-- page specific plugin styles -->
 
 		<!-- fonts -->
-
+		<script type="text/javascript" src="plugin/My97DatePicker/WdatePicker.js"></script>
 
 		<!-- ace styles -->
 

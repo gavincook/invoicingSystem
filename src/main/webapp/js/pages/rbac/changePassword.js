@@ -6,16 +6,15 @@ $(function() {
 		}
 	});
 	$("#confirm").click(function() {
-		$("form").validate("validate");
-		alert($("form").validate("getResult"));
-		$.postData(contextPath + "/user/doChangePassword", {
-			password : $("#newPassword").val()
-		}, function() {
-			alert("密码修改成功.");
-			$("form").reset();
-		}, function() {
-			alert("密码修改出错.");
-			$("form").reset();
+		$("form").validate("validate").done(function(result){
+			if(result){
+				$.getJsonData(contextPath + "/user/doChangePassword",{
+					password : $("#newPassword").val()
+				},{type:"Post"}).done(function(){
+					moon.info("密码修改成功");
+					$("form").reset();
+				});
+			}
 		});
 	});
 });

@@ -19,6 +19,7 @@ import org.moon.rbac.domain.annotation.PermissionMapping;
 import org.moon.rbac.service.UserService;
 import org.moon.rest.annotation.Post;
 import org.moon.support.spring.annotation.FormParam;
+import org.moon.utils.MD5;
 import org.moon.utils.MessageUtils;
 import org.moon.utils.ParamUtils;
 import org.springframework.stereotype.Controller;
@@ -175,7 +176,7 @@ public class UserAction extends BaseAction{
 	 @RequestMapping("/matchOldPassword")
 	 @ResponseBody
 	 public Map<String,Object> matchOldPassword(@RequestParam("password")String newPassword,HttpServletRequest request){
-		 if(userService.getCurrentUser(request).getPassword().equals(newPassword))
+		 if(userService.getCurrentUser(request).getPassword().equals( MD5.getMD5(newPassword+"Moon")))
 		 return MessageUtils.getMapMessage(true);
 		 else
 			 return MessageUtils.getMapMessage(false);
@@ -195,6 +196,7 @@ public class UserAction extends BaseAction{
 			 return MessageUtils.getMapMessage(false);
 		 }
 		 user.setPassword(newPassword);
+		 user.encryptPassword();
 		 user.updateUser();
 		 return MessageUtils.getMapMessage(true);
 	 }

@@ -38,6 +38,7 @@ $(document).ready(function () {
 	 
 	 $("[target='main']").live("click",function(){
 		var $menu = $(this);
+		$(".easyValidation").remove();
 		$.getJsonData($menu.attr("data-href"),{},{dataType:'html',type:'Get'}).done(function(data){
 			$(".main-content").html(data);
 		});

@@ -36,6 +36,10 @@ $(document).ready(function () {
 		 }
 	 });
 	 
+	 $.getJsonData(contextPath+"/apply/applyList",{},{dataType:'html',type:'Get'}).done(function(data){
+			$(".main-content").html(data);
+	 });
+	 
 	 $("[target='main']").live("click",function(){
 		var $menu = $(this);
 		$(".easyValidation").remove();

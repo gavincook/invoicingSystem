@@ -5,9 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
 <m:require src="jquery,bootstrap,common,ev,zt,js/ztree.extend.js,table,dialog,noty,font,{apply/apply}"></m:require>
-
 <title>商品管理</title>
 </head>
 <body style="margin:0;">
@@ -15,8 +13,6 @@
 	<div class="form-group" style="padding:15px;margin-bottom: 0px;">
 		<span>商品名:</span>
 		<input type="text" name="storeName" placeholder="商品名"/>
-		<span>申领人:</span>
-		<input type="text" name="applyUser" placeholder="申领人"/>
 		<span>申领时间:</span>
 		<input type="text" name="begin" placeholder="开始时间"  onClick="WdatePicker()"/>
 		<span>至</span>

@@ -13,17 +13,6 @@ $(function(){
 					 date.setTime(rowData.apply_date);
 					 return date.getFullYear()+"-"+(date.getMonth()+1)+"-"
 					 +date.getDate()+" "+date.getHours()+":"+date.getMinutes();
-				 }},
-				 {display:"操作",render:function(rowData){
-					 if(rowData.status==0){
-						 return "<div id=\"status_"+rowData.id+"\"><a href=\"#\"  onclick=\"agree("+rowData.id+")\">发放</a>&nbsp;&nbsp;"+
-						 		"<a href=\"#\" onclick=\"disAgree("+rowData.id+")\">驳回</a></div>";
-					 }else if(rowData.status==1){
-						 return "已发放&nbsp;&nbsp;<a href=\"javascript:void(0)\" onclick=\"remove1("+rowData.id+")\">删除</a>&nbsp;&nbsp;";
-					 }else{
-						 return "已驳回&nbsp;&nbsp;<a href=\"javascript:void(0)\" onclick=\"remove1("+rowData.id+")\">删除</a>&nbsp;&nbsp;";
-					 }
-					 
 				 }}],
 		formatData:function(data){return data.items;},
 		title:"申领列表",

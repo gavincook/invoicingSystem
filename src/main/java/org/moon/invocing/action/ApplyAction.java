@@ -18,6 +18,7 @@ import org.moon.message.WebResponse;
 import org.moon.pagination.Pager;
 import org.moon.rbac.domain.User;
 import org.moon.rbac.domain.annotation.MenuMapping;
+import org.moon.rbac.service.UserService;
 import org.moon.rest.annotation.Get;
 import org.moon.rest.annotation.Post;
 import org.moon.support.spring.annotation.FormParam;
@@ -42,6 +43,9 @@ public class ApplyAction extends BaseAction {
 	private ApplyRepository applyRepository;
 	@Resource
 	private StoreService storeService;
+
+	@Resource
+	private UserService userService;
 	
 	@RequestMapping("")
 	@MenuMapping(code="management_4",name="物品申领",parentCode="management",url="/apply")
@@ -51,25 +55,35 @@ public class ApplyAction extends BaseAction {
 	
 	@RequestMapping("/applyList")
 	@MenuMapping(code="management_3",name="申领列表",parentCode="management",url="/apply/applyList")
-	public ModelAndView showListPage(){
-		return new ModelAndView("pages/apply/applyList");
+	public ModelAndView showListPage(HttpServletRequest request){
+		User currentUser = userService.getCurrentUser(request);
+		if(currentUser.isAdmin()){
+			return new ModelAndView("pages/apply/applyList");
+		}else{
+			return new ModelAndView("pages/apply/applyListForUser");
+		}
 	}
 	
 	@Get("/list")
 	public @ResponseBody Pager list(HttpServletRequest request) throws UnsupportedEncodingException{
 		Criteria criteria = ParamUtils.getParamsAsCerteria(request);
 		criteria.add(Restrictions.eq("a.delete_flag", false));
-		if(request.getParameter("user_name")!=null){
-			criteria.add(Restrictions.like("u.user_name",URLDecoder.decode(request.getParameter("user_name"),"UTF-8"),MatchMode.ANYWHERE));
+		User currentUser = userService.getCurrentUser(request);
+		if(currentUser.isAdmin()){
+			if(request.getParameter("user_name")!=null){
+				criteria.add(Restrictions.like("u.user_name",URLDecoder.decode(request.getParameter("user_name"),"UTF-8"),MatchMode.ANYWHERE));
+			}
+		}else{
+			criteria.add(Restrictions.eq("u.user_name",currentUser.getUserName()));
 		}
 		if(request.getParameter("store_name")!=null){
 			criteria.add(Restrictions.like("s.name", URLDecoder.decode(request.getParameter("store_name"),"UTF-8"),MatchMode.ANYWHERE));
 		}
 		if(request.getParameter("begin")!=null){
-			criteria.add(Restrictions.ge("a.apply_date", request.getParameter("begin")));
+			criteria.add(Restrictions.ge("a.apply_date", request.getParameter("begin")+" 00:00:00"));
 		}
 		if(request.getParameter("end")!=null){
-			criteria.add(Restrictions.le("a.apply_date", request.getParameter("end")));
+			criteria.add(Restrictions.le("a.apply_date", request.getParameter("end")+" 23:59:59"));
 		}
 		return  applyService.listForPage(criteria);
 	}
@@ -85,6 +99,7 @@ public class ApplyAction extends BaseAction {
 		apply.setUserId((Long) request.getSession().getAttribute(User.CURRENT_USER_ID));
 		apply.setDeleteFlag(false);
 		apply.setStatus(0);
+
 		applyRepository.save(apply);
 		return  WebResponse.build();
 	}

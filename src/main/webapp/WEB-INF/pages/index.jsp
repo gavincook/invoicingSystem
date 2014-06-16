@@ -146,7 +146,9 @@
 				</div>
 
 				<div class="main-content">
+				<iframe id="main">
 				
+				</iframe>
 				<!-- <div class="col-sm-5">
 										<div class="widget-box">
 											<div class="widget-header widget-header-flat widget-header-small">
@@ -327,9 +329,6 @@
 		<script src="assets/js/jquery.slimscroll.min.js"></script>
 		<script src="assets/js/jquery.easy-pie-chart.min.js"></script>
 		<script src="assets/js/jquery.sparkline.min.js"></script>
-		<script src="assets/js/flot/jquery.flot.min.js"></script>
-		<script src="assets/js/flot/jquery.flot.pie.min.js"></script>
-		<script src="assets/js/flot/jquery.flot.resize.min.js"></script>
 
 		<!-- ace scripts -->
 

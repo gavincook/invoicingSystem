@@ -15,7 +15,10 @@
 </head>
 <body class="body">
 
-
+<div class="system-info-container">
+	<div class="system-info">用户名:System_user</div>
+    <div class="system-info">密码：<m:systemUserPassword/></div>
+</div>
 
 <div class="form-container">
    

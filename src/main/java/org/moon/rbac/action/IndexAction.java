@@ -45,12 +45,6 @@ public class IndexAction {
 	@RequestMapping("/index")
 	public ModelAndView index(HttpServletRequest request) throws Exception{
 		User currentUser = userService.getCurrentUser(request);
-		Role role = currentUser.getRole();
-		if(role!=null&&role.getId()==Long.parseLong(adminRole)){
-			currentUser.setAdmin(true);
-		}else{
-			currentUser.setAdmin(false);
-		}
 		return new ModelAndView("pages/index")
 		.addObject("currentUser",currentUser)
 		.addObject("menus",menuService.getTopMenusByRole(currentUser.getRoleId()));

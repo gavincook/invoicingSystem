@@ -95,26 +95,31 @@
 			if(!table.autoLayout){
 				$tableDiv.addClass("fixed-layout");
 			}
-			var tableHtml = "";
-			tableHtml+="<div class=\"table-container\"><table class=\"table table-bordered table-hover\">";
-			tableHtml+=methods.renderHeader(opts);
+			
+			var $tableContainerDiv = $(document.createElement("div"));
+			$tableContainerDiv.addClass("table-container");
+			var $table = $(document.createElement("table"));
+			$table.append(methods.renderHeader(opts));
+			$table.addClass("table table-bordered table-hover");
+			
 			var renderTableDfd = $.Deferred();
 			methods.renderData.call($container,opts).done(function(tbody){
-				tableHtml+=tbody;
+				$table.append(tbody);
 				renderTableDfd.resolve();
 			});
 			
 			$.when(renderTableDfd).done(function(){
-				tableHtml+="</table></div>";
-				tableHtml+=methods.renderPagination(opts);
-				tableHtml+=methods.renderModal();
-				tableHtml+=methods.renderSelection();
-				tableHtml+="</div>";
 				if(opts.emptyParent){
-					$container.html($tableDiv.append($(tableHtml)));
-				}else{
-					$container.append($tableDiv.append($(tableHtml)));
+					$container.empty();
 				}
+				$tableContainerDiv.append($table);
+				$tableDiv.append($tableContainerDiv)
+				$tableDiv.append(methods.renderPagination(opts));
+				$tableDiv.append(methods.renderModal());
+				$tableDiv.append(methods.renderSelection());
+				
+				$container.append($tableDiv);
+				
 				tableCache[$container.selector] = table;
 				methods.bindEvents.call($container,opts);
 			});
@@ -127,6 +132,27 @@
 			var pageCount = Math.ceil((opts.total||1)/opts.pageSize);
 			opts.pageCount = pageCount||1;
 
+			var $paginationDiv = methods.ce("div",{"class":"grid-pagination"});
+			
+		
+			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"first"}).append(methods.ce("i",{"class":"fa fa-step-backward"})));
+			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"prev"}).append(methods.ce("i",{"class":"icon-play icon-prev"})));
+			$paginationDiv.append(	methods.ce("input",{"class":"input-small",type:"text",name:"currentPage",value:(opts.pageIndex||1)}));
+			$paginationDiv.append("/");
+			$paginationDiv.append(methods.ce("span",{"class":"pagecount"}).html(pageCount));
+			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"next"}).append(methods.ce("i",{"class":"icon-play"})));
+			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"last"}).append(methods.ce("i",{"class":"icon-step-forward"})));
+			$paginationDiv.append(	methods.ce("span",{"class":"split"}));
+			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"refresh"}).append(methods.ce("i",{"class":"icon-refresh"})));
+			
+			var $dataInfo = methods.ce("div",{"class":"data-info"});
+			$dataInfo.append(	methods.ce("span").html("当前显示"));
+			$dataInfo.append(	methods.ce("span",{"class":"current-data-info"}).html(startIndex+"~"+endIndex));
+			$dataInfo.append(	methods.ce("span").html("条,共"));
+			$dataInfo.append(	methods.ce("span",{"class":"total"}).html((opts.total||0)));
+			$dataInfo.append("条记录");
+			
+			$paginationDiv.append($dataInfo);
 			var paginationHtml = "<div class=\"grid-pagination\">"
 		   +"<span class=\"pagination-btn\" action=\"first\"> <i class=\"icon-step-backward\"></i></span>"
 		   +"<span class=\"pagination-btn\" action=\"prev\"> <i class=\"icon-play icon-prev\"></i></span>"
@@ -152,7 +178,14 @@
 		   +"</span>条记录"
 		   +"</div>"
 		   +"</div>";
-		   return paginationHtml;
+		   return $paginationDiv;
+		},
+		ce:function(tag,opts){
+			var $tag = $(document.createElement(tag));
+			for(var name in opts){
+				$tag.attr(name,opts[name]);
+			}
+			return $tag;
 		},
 		refreshPagination:function(opts){
 			var $pagination = $(".grid-pagination",this);

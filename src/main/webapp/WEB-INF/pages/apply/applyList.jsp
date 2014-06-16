@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<m:require src="jquery,bootstrap,common,ev,zt,js/ztree.extend.js,table,dialog,noty,font,{apply/apply}"></m:require>
+<m:require src="jquery,bootstrap,common,ev,zt,js/ztree.extend.js,table,dialog,noty,{apply/apply}"></m:require>
 
 <title>商品管理</title>
 </head>

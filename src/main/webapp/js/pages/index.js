@@ -1,14 +1,21 @@
+
 $(document).ready(function () {
+	alert("ss");
+	 if(admin=="true"){
+		 $.getJsonData(contextPath+"/apply/applyList",{},{dataType:'html',type:'Get'}).done(function(data){
+				$(".main-content").html(data);
+		 });
+	 }else{
+		 $.getJsonData(contextPath+"/apply",{},{dataType:'html',type:'Get'}).done(function(data){
+				$(".main-content").html(data);
+		 });
+	 }
 	
-	/**
-	 * 给iframe绑定load事件,load触发后给iframe的内容绑定点击事件,关闭bootstrap的dropdown菜单
-	 */
-	$("iframe#main").bind("load",function(){
-		$(this.contentDocument).click(function(){
-			$("[id^='menu_']").removeClass('open');
-		});
+	$(".first-menu").click(function(){
+		$(".submenu").hide("slow");
+		$("ul",this).toggle();
 	});
-	
+
 	 /**
 	  * 异步加载菜单
 	  */
@@ -35,22 +42,15 @@ $(document).ready(function () {
 			 });
 		 }
 	 });
-	 if(admin=="true"){
-		 $.getJsonData(contextPath+"/apply/applyList",{},{dataType:'html',type:'Get'}).done(function(data){
-				$(".main-content").html(data);
-		 });
-	 }else{
-		 $.getJsonData(contextPath+"/apply",{},{dataType:'html',type:'Get'}).done(function(data){
-				$(".main-content").html(data);
-		 });
-	 }
+
 	 
-	 $("[target='main']").live("click",function(){
+	 $("[target='main']").live("click",function(e){
 		var $menu = $(this);
 		$(".easyValidation").remove();
 		$.getJsonData($menu.attr("data-href"),{},{dataType:'html',type:'Get'}).done(function(data){
 			$(".main-content").html(data);
 		});
+		e.stopPropagation();
 		return false;
 	 });
  });

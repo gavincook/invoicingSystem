@@ -76,7 +76,7 @@
 				}
 				header+="<th data-name=\""+(column.sortName||column.name)+"\" class=\""+(column.sort?"sort-column":"")+"\" style=\"text-align:"+(column.align||"left")+"; width:"+(column.width||"auto")+";\">"+(column.display||column.name);
 				if(column.sort){
-					header+="<i class=\"icon-angle-down  transparent\"></i> <i class=\"icon-angle-up hide\"></i> ";
+					header+="<i class=\"fa fa-angle-down  transparent\"></i> <i class=\"fa fa-angle-up hide\"></i> ";
 				}
 				header+="</th>";
 			});
@@ -136,14 +136,14 @@
 			
 		
 			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"first"}).append(methods.ce("i",{"class":"fa fa-step-backward"})));
-			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"prev"}).append(methods.ce("i",{"class":"icon-play icon-prev"})));
+			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"prev"}).append(methods.ce("i",{"class":"fa fa-play fa-rotate-180"})));
 			$paginationDiv.append(	methods.ce("input",{"class":"input-small",type:"text",name:"currentPage",value:(opts.pageIndex||1)}));
 			$paginationDiv.append("/");
 			$paginationDiv.append(methods.ce("span",{"class":"pagecount"}).html(pageCount));
-			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"next"}).append(methods.ce("i",{"class":"icon-play"})));
-			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"last"}).append(methods.ce("i",{"class":"icon-step-forward"})));
+			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"next"}).append(methods.ce("i",{"class":"fa fa-play"})));
+			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"last"}).append(methods.ce("i",{"class":"fa fa-step-forward"})));
 			$paginationDiv.append(	methods.ce("span",{"class":"split"}));
-			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"refresh"}).append(methods.ce("i",{"class":"icon-refresh"})));
+			$paginationDiv.append(	methods.ce("span",{"class":"pagination-btn",action:"refresh"}).append(methods.ce("i",{"class":"fa fa-refresh"})));
 			
 			var $dataInfo = methods.ce("div",{"class":"data-info"});
 			$dataInfo.append(	methods.ce("span").html("当前显示"));
@@ -154,18 +154,18 @@
 			
 			$paginationDiv.append($dataInfo);
 			var paginationHtml = "<div class=\"grid-pagination\">"
-		   +"<span class=\"pagination-btn\" action=\"first\"> <i class=\"icon-step-backward\"></i></span>"
-		   +"<span class=\"pagination-btn\" action=\"prev\"> <i class=\"icon-play icon-prev\"></i></span>"
+		   +"<span class=\"pagination-btn\" action=\"first\"> <i class=\"fa fa-step-backward\"></i></span>"
+		   +"<span class=\"pagination-btn\" action=\"prev\"> <i class=\"fa fa-play fa fa-prev\"></i></span>"
 		   +"<input type=\"text\" name=\"currentPage\" class=\"input-small\" value=\"" 
 		   +(opts.pageIndex||1)
 		   +"\"/>/"
 		   +"<span class=\"pagecount\">"
 		   +pageCount
 		   +"</span>"
-		   +"<span class=\"pagination-btn\" action=\"next\"> <i class=\"icon-play\"></i></span>"
-		   +"<span class=\"pagination-btn\" action=\"last\"> <i class=\"icon-step-forward\"></i></span>"
+		   +"<span class=\"pagination-btn\" action=\"next\"> <i class=\"fa fa-play\"></i></span>"
+		   +"<span class=\"pagination-btn\" action=\"last\"> <i class=\"fa fa-step-forward\"></i></span>"
 		   +"<span class=\"split\"></span>"
-		   +"<span class=\"pagination-btn\" action=\"refresh\"> <i class=\"icon-refresh\"></i></span><!-- icon-spin-->"
+		   +"<span class=\"pagination-btn\" action=\"refresh\"> <i class=\"fa fa-refresh\"></i></span><!-- fa fa-spin-->"
 		   +"<div class=\"data-info\">"
 		   +"<span>当前显示</span>"
 		   +"<span class=\"current-data-info\">"+startIndex
@@ -199,7 +199,7 @@
 			$pagination.find(".total").html(opts.total||0);
 		},
 		renderModal:function(){
-			return "<div class=\"modal-backdrop fade hide\"><span> <i class=\"icon-spinner icon-spin\"></i>Loading...</span></div>";
+			return "<div class=\"modal-backdrop fade hide\"><span> <i class=\"fa fa-spinner fa-spin\"></i>Loading...</span></div>";
 		},
 	    renderSelection:function(){
 			return "<div style=\"position: absolute;border: 1px dashed #91B4F1;background:rgba(185, 213, 241, 0.7);\" id=\"area\"></div>";
@@ -207,8 +207,8 @@
 		refresh:function(opts){
 			var $container = this;
 			var dfd = $.Deferred();
-			var $refreshBtn = $(".pagination-btn .icon-refresh");
-			$refreshBtn.toggleClass("icon-spin").closest(".datagrid").find(".modal-backdrop").toggleClass("hide").toggleClass("in");
+			var $refreshBtn = $(".pagination-btn .fa-refresh");
+			$refreshBtn.toggleClass("fa-spin").closest(".datagrid").find(".modal-backdrop").toggleClass("hide").toggleClass("in");
 
 			
 			methods.getData.call(this,opts).done(function(data){
@@ -238,7 +238,7 @@
 				});
 				$("table tbody",$container).html(dataHtml);
 				methods.bindEventsForTr.call($container,opts);
-				$refreshBtn.toggleClass("icon-spin").closest(".datagrid").find(".modal-backdrop").toggleClass("hide").toggleClass("in");
+				$refreshBtn.toggleClass("fa-spin").closest(".datagrid").find(".modal-backdrop").toggleClass("hide").toggleClass("in");
 				dfd.resolve(dataHtml);
 				methods.refreshPagination.call($container,opts);
 			});
@@ -329,9 +329,9 @@
 			**/
 			$("thead th.sort-column",$container).click(function(){
 				var $th = $(this),
-				$downIcon = $th.find(".icon-angle-down"),
-				$upIcon = $th.find(".icon-angle-up");
-				$("thead th.sort-column",$container).not($th).find(".icon-angle-down").addClass("transparent").next().addClass("hide");
+				$downIcon = $th.find(".fa-angle-down"),
+				$upIcon = $th.find(".fa-angle-up");
+				$("thead th.sort-column",$container).not($th).find(".fa-angle-down").addClass("transparent").next().addClass("hide");
 
 				if($downIcon.hasClass("hide")&&$upIcon.hasClass("hide")){
 					$upIcon.removeClass("hide");

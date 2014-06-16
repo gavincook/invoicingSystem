@@ -85,6 +85,9 @@ public class User extends BaseDomain{
 	 * 密码是否加密
 	 */
 	private boolean isEncrypt = false;
+	
+	private boolean admin;
+	
 	@Resource
 	private UserEvent userEvent;
 	
@@ -309,5 +312,13 @@ public class User extends BaseDomain{
 
 	public void setDepartmentId(Long departmentId) {
 		this.departmentId = departmentId;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 }

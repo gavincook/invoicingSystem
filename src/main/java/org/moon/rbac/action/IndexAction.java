@@ -4,10 +4,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.moon.rbac.domain.Role;
 import org.moon.rbac.domain.User;
 import org.moon.rbac.domain.annotation.LoginRequired;
 import org.moon.rbac.service.MenuService;
 import org.moon.rbac.service.UserService;
+import org.moon.support.spring.config.annotation.Config;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +30,12 @@ public class IndexAction {
 	@Resource
 	private UserService userService;
 	
+	@Config("role.admin")
+	private String adminRole;
+	
+	@Config("role.user")
+	private String userRole;
+	
 	/**
 	 * show the index page
 	 * @param request
@@ -37,6 +45,12 @@ public class IndexAction {
 	@RequestMapping("/index")
 	public ModelAndView index(HttpServletRequest request) throws Exception{
 		User currentUser = userService.getCurrentUser(request);
+		Role role = currentUser.getRole();
+		if(role!=null&&role.getId()==Long.parseLong(adminRole)){
+			currentUser.setAdmin(true);
+		}else{
+			currentUser.setAdmin(false);
+		}
 		return new ModelAndView("pages/index")
 		.addObject("currentUser",currentUser)
 		.addObject("menus",menuService.getTopMenusByRole(currentUser.getRoleId()));

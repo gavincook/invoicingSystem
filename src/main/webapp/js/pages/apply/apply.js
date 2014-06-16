@@ -37,7 +37,7 @@ $(function(){
 				 $("#applyForm").ajaxSubmitForm(contextPath+"/apply/add","",
        				 function(){
 			        		 $("#applyForm").reset();
-			        		 moon.success("商品申领成功");
+			        		 moon.success("<div style=\"font-size:35px;padding:10px;\">商品申领成功</div>");
 			        	 },
 			        	 function(){moon.error("失败");}
 			     );

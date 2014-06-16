@@ -49,7 +49,7 @@ ${info }
 					msgalign="right"  class="col-xs-10 col-sm-5"/>
 				</div>
 			</div>
-			<div class="clearfix form-actions">
+			<div class="clearfix">
 			<div class="col-md-offset-3 col-md-9">
 				<button class="btn btn-info" type="button" id="confirm">
 					<i class="icon-ok bigger-110"></i> 更改

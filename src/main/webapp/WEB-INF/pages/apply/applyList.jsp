@@ -11,10 +11,14 @@
 <body style="margin:0;">
 <!-- 用户列表 -->
 	<div class="form-group" style="padding:15px;margin-bottom: 0px;">
-		<input type="text" name="storeName" placeholder="商品"/>
+		<span>商品名:</span>
+		<input type="text" name="storeName" placeholder="商品名"/>
+		<span>申领人:</span>
 		<input type="text" name="applyUser" placeholder="申领人"/>
-		<input type="text" name="begin" placeholder="时间"  onClick="WdatePicker()"/>
-		<input type="text" name="end" placeholder="至"  onClick="WdatePicker()"/>
+		<span>申领时间:</span>
+		<input type="text" name="begin" placeholder="开始时间"  onClick="WdatePicker()"/>
+		<span>至</span>
+		<input type="text" name="end" placeholder="结束时间"  onClick="WdatePicker()"/>
 		<button class="btn btn-sm btn-info" type="button" id="query">
 					<i class="icon-search bigger-110"></i>查询
 		</button>

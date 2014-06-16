@@ -35,10 +35,15 @@ $(document).ready(function () {
 			 });
 		 }
 	 });
-	 
-	 $.getJsonData(contextPath+"/apply/applyList",{},{dataType:'html',type:'Get'}).done(function(data){
-			$(".main-content").html(data);
-	 });
+	 if(admin=="true"){
+		 $.getJsonData(contextPath+"/apply/applyList",{},{dataType:'html',type:'Get'}).done(function(data){
+				$(".main-content").html(data);
+		 });
+	 }else{
+		 $.getJsonData(contextPath+"/apply",{},{dataType:'html',type:'Get'}).done(function(data){
+				$(".main-content").html(data);
+		 });
+	 }
 	 
 	 $("[target='main']").live("click",function(){
 		var $menu = $(this);

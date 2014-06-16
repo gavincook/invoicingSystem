@@ -15,7 +15,7 @@
 <title>商品管理</title>
 </head>
 <body style="margin:0;">
-	<form class="form-horizontal" id="applyForm">
+	<form class="form-horizontal" id="applyForm" style="padding:15px;">
 		<div class="form-group">
 			<label class="col-sm-3 control-label no-padding-right"> 物品名称： </label>
 			<div class="col-sm-9">
@@ -34,7 +34,7 @@
 				<input type="text" name="apply.applyNumber" validate="validate[required,call(checkStore)]" placeholder="申领数量"class="col-xs-10 col-sm-5">
 			</div>
 		</div>
-		<div class="clearfix form-actions">
+		<div class="clearfix">
 			<div class="col-md-offset-3 col-md-9">
 				<button class="btn btn-info" type="button" id="apply">
 					<i class="icon-ok bigger-110"></i> 申领

@@ -9,6 +9,9 @@
 		<!-- basic styles -->
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+		<script type="text/javascript">
+			var admin = "${currentUser.admin}";
+		</script>
 		 <m:require src="jquery,bootstrap,noty,common,js/pages/index.js"></m:require>
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />

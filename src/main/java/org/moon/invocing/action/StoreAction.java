@@ -79,4 +79,11 @@ public class StoreAction extends BaseAction {
 		storeService.delete(ids);
 		return  WebResponse.build();
 	}
+	
+	@Post("/replenish")
+	public @ResponseBody WebResponse replenish(@RequestParam("id")Long id,@RequestParam("replenishNumber")Integer replenishNumber){
+		storeRepository.replenish(id, replenishNumber);
+		 return WebResponse.build();
+	}
+	
 }

@@ -40,7 +40,7 @@ $(document).ready(function () {
 				$(".main-content").html(data);
 		 });
 	 }else{
-		 $.getJsonData(contextPath+"/apply",{},{dataType:'html',type:'Get'}).done(function(data){
+		 $.getJsonData(contextPath+"/apply?_random="+Math.random(),{},{dataType:'html',type:'Get'}).done(function(data){
 				$(".main-content").html(data);
 		 });
 	 }

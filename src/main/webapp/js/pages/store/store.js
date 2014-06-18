@@ -17,6 +17,11 @@ $(function(){
 		        	 name:'addBtn'
 		         },
 		         {
+		        	 text:"补充库存",
+		        	 click:btnHandler,
+		        	 name:'replenishBtn'
+		         },
+		         {
 		        	 text:"编辑",
 		        	 click:btnHandler,
 		        	 name:'editBtn'
@@ -85,7 +90,8 @@ function btnHandler(btnTest){
 		var name = selectRows[0].name;
 		$("[name$='name']","#storeForm").val(name);
 		$("[name$='price']","#storeForm").val(selectRows[0].price);
-		$("[name$='number']","#storeForm").val(selectRows[0].number);
+		$("[name='store.number']","#storeForm").val(selectRows[0].number);
+		$("[name='store.maxnumber']","#storeForm").val(selectRows[0].maxnumber);
 		$('#storeForm').dialog({
 			title:"编辑商品",
 			afterShown:function(){
@@ -124,6 +130,55 @@ function btnHandler(btnTest){
 			         }
 			         ]
 		});
+	}else if(btnTest=='replenishBtn'){//补充库存
+		var selectRows = table.getSelect();
+		if(selectRows.length!=1){
+			moon.warn("请选中一条数据进行库存补充.");
+			return false;
+		}
+		var id = selectRows[0].id;
+		var name = selectRows[0].name;
+		$("[name='name']").val(name);
+		
+		$('#replenishForm').dialog({
+			title:"补充库存("+name+")",
+			afterShown:function(){
+				$("#replenishForm").validate({align:'right',theme:"darkblue",model:"update"});
+			},
+			beforeClose:function(){
+				$("#replenishForm").validate("hide");
+			},
+			buttons:[
+			         {
+			        	 text : "保存",
+			        	 css  : "btn btn-primary",
+			        	 click:function(){
+			        		 $("#replenishForm").validate("validate").done(function(result){
+			        			 if(result){
+					        		 $("#replenishForm").ajaxSubmitForm(contextPath+"/store/replenish",
+						        			 {"id":id},
+					        				 function(){
+					 			        		 $("#replenishForm").dialog("close");
+					 			        		 table.refresh();
+					 			        		 $("#replenishForm").reset();
+					 			        		 moon.success("库存补充成功");
+					 			        	 },
+					 			        	 function(){moon.error("失败");}
+					 			     );
+			        			 }
+			        		 });
+			        	 }
+			         },
+			         {
+			        	 text  : "取消",
+			        	 css   : "btn",
+			        	 click : function(){
+			        		 $("#replenishForm").dialog("close");
+			        	 }
+			         }
+			         ]
+		});
+	
 	}else if(btnTest=='deleteBtn'){//删除数据
 		var selectRows =  table.getSelect();
 		if(selectRows.length<1){

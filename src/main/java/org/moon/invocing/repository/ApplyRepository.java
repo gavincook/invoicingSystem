@@ -21,4 +21,6 @@ public interface ApplyRepository extends BaseRepository<Apply>{
 	public Integer checkRemaind(@Param("id")Long id);
 	
 	public void agree(@Param("id")Long id);
+	
+	public void grant(@Param("number")Integer number,@Param("storeId")Long storeId);
 }

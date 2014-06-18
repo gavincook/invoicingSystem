@@ -27,6 +27,10 @@ $(function(){
        				 function(){
 			        		 $("#applyForm").reset();
 			        		 moon.success("<div style=\"font-size:35px;padding:10px;\">商品申领成功</div>");
+			        		 $.getJsonData(contextPath+"/apply?_random="+Math.random(),{},{dataType:'html',type:'Get'}).done(function(data){
+			        				$(".main-content").html(data);
+			        		 });
+			        	 
 			        	 },
 			        	 function(){moon.error("失败");}
 			     );

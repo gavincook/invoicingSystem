@@ -99,8 +99,8 @@ public class ApplyAction extends BaseAction {
 		apply.setUserId((Long) request.getSession().getAttribute(User.CURRENT_USER_ID));
 		apply.setDeleteFlag(false);
 		apply.setStatus(0);
-
 		applyRepository.save(apply);
+		applyRepository.grant(apply.getApplyNumber(),apply.getStoreId());
 		return  WebResponse.build();
 	}
 	

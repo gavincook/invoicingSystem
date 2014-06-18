@@ -31,5 +31,16 @@
   	<input type="text" class="form-control" name="store.maxnumber"/>
   </div>
 </form>
+
+<form id="replenishForm" style="display: none;">
+  <div class="form-group">
+  	<span class="label-text">商品名称:</span>
+  	<input type="text" class="form-control" name="name" disabled/>
+  </div>
+  <div class="form-group">
+  	<span class="label-text">需要增加的库存量:</span>
+  	<input type="text" class="form-control" name="replenishNumber" validate="validate[required,number]"/>
+  </div>
+</form>
 </body>
 </html>

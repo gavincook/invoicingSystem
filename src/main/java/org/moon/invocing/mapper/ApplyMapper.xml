@@ -34,4 +34,9 @@
 		ON s.id = a.store_id AND a.id = #{id}
 		SET number = number-a.apply_number
 	</update>
+	
+	<update id="grant">
+		UPDATE im_store s
+		SET number = number-#{number} where id=#{storeId}
+	</update>
 </mapper>

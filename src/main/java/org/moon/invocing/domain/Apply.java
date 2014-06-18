@@ -18,6 +18,7 @@ public class Apply extends BaseDomain{
 	
 	private Integer applyNumber;
 	
+	//现在作为activity的映射
 	private Integer status;
 
 	public Long getUserId() {

@@ -53,6 +53,11 @@ $(document).ready(function () {
 		});
 		return false;
 	 });
+	 
+	 $("#showMenu").click(function(){
+		 $("#detailsMenu").toggle();
+	 });
+	 
  });
 
   

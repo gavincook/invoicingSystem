@@ -39,4 +39,11 @@
 		UPDATE im_store s
 		SET number = number-#{number} where id=#{storeId}
 	</update>
+	
+	<select id="sum" resultType="Integer">
+		SELECT SUM(a.apply_number) 
+		FROM im_apply a
+		JOIN im_activity ac
+		ON a.status = ac.id and ac.status = 1 and a.user_id = #{userId} AND a.store_id=#{storeId}
+	</select>
 </mapper>

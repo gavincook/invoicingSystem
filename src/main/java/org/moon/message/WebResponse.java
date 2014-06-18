@@ -18,6 +18,8 @@ public class WebResponse{
 	 */
 	private Object result;
 	
+	private Object extra;
+	
 	/**
 	 * 异常信息
 	 */
@@ -68,5 +70,14 @@ public class WebResponse{
 
 	public boolean isPermission() {
 		return permission;
+	}
+
+	public Object getExtra() {
+		return extra;
+	}
+
+	public WebResponse setExtra(Object extra) {
+		this.extra = extra;
+		return this;
 	}
 }

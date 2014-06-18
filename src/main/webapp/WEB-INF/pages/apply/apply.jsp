@@ -15,37 +15,43 @@
 <title>商品管理</title>
 </head>
 <body style="margin:0;">
-	<form class="form-horizontal" id="applyForm" style="padding:15px;">
-		<div class="form-group">
-			<label class="col-sm-3 control-label no-padding-right"> 物品名称： </label>
-			<div class="col-sm-9">
-				<select class="col-xs-10 col-sm-5" name="apply.storeId">
-					<c:forEach items="${stores}" var="s">
-						<option value="${s.id }" data-number="${s.number }">
-							${s.name}(${s.number })
-						</option>
-					</c:forEach>
-				</select>
+	<c:if test="${running==true }">
+		<form class="form-horizontal" id="applyForm" style="padding:15px;">
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right"> 物品名称： </label>
+				<div class="col-sm-9">
+					<select class="col-xs-10 col-sm-5" name="apply.storeId">
+						<c:forEach items="${stores}" var="s">
+							<option value="${s.id }" data-number="${s.number }">
+								${s.name}(${s.number })
+							</option>
+						</c:forEach>
+					</select>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-3 control-label no-padding-right" > 申领数量： </label>
-			<div class="col-sm-9">
-				<input type="text" name="apply.applyNumber" validate="validate[required,call(checkStore)]" placeholder="申领数量"class="col-xs-10 col-sm-5">
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right" > 申领数量： </label>
+				<div class="col-sm-9">
+					<input type="text" name="apply.applyNumber" validate="validate[required,call(checkStore)]" placeholder="申领数量"class="col-xs-10 col-sm-5">
+				</div>
 			</div>
-		</div>
-		<div class="clearfix">
-			<div class="col-md-offset-3 col-md-9">
-				<button class="btn btn-info" type="button" id="apply">
-					<i class="icon-ok bigger-110"></i> 申领
-				</button>
-
-				&nbsp; &nbsp; &nbsp;
-				<button class="btn" type="reset">
-					<i class="icon-undo bigger-110"></i> 重置
-				</button>
+			<div class="clearfix">
+				<div class="col-md-offset-3 col-md-9">
+					<button class="btn btn-info" type="button" id="apply">
+						<i class="icon-ok bigger-110"></i> 申领
+					</button>
+	
+					&nbsp; &nbsp; &nbsp;
+					<button class="btn" type="reset">
+						<i class="icon-undo bigger-110"></i> 重置
+					</button>
+				</div>
 			</div>
-		</div>
-	</form>
+		</form>
+	</c:if>
+	
+	<c:if test="${running==false}">
+		申请还未开始，请耐心等待
+	</c:if>
 </body>
 </html>

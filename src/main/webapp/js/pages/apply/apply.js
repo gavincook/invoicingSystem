@@ -1,4 +1,5 @@
 
+
 var table;
 $(function(){
 	table = $("#applyTable").table({
@@ -26,11 +27,16 @@ $(function(){
 				 $("#applyForm").ajaxSubmitForm(contextPath+"/apply/add","",
        				 function(){
 			        		 $("#applyForm").reset();
-			        		 moon.success("<div style=\"font-size:35px;padding:10px;\">商品申领成功</div>");
+			        		 var _n=moon.success("<div style=\"font-size:35px;padding:10px;\">商品申领成功</div>");
+			        		 console.log(_n);
 			        		 $.getJsonData(contextPath+"/apply?_random="+Math.random(),{},{dataType:'html',type:'Get'}).done(function(data){
 			        				$(".main-content").html(data);
+			        				setTimeout(function(){
+			        					 $("#"+_n.options.id).hide(1000,function(){
+						        			 $("#noty_topCenter_layout_container").remove();
+						        		 });
+			        				},2000);
 			        		 });
-			        	 
 			        	 },
 			        	 function(){moon.error("失败");}
 			     );
@@ -110,15 +116,22 @@ function checkStore(){
 	var dfd = $.Deferred();
 	var $applyNumber = $("[name='apply.applyNumber']");
 	$.getJsonData(contextPath+"/apply/check",{id:$("[name='apply.storeId']").val()},{type:"Post"}).done(function(result){
-		var number = result.result[0];
-		var maxnumber = number.maxnumber||0;
-		number=number.number||0;
-		if($applyNumber.val()>number){
-			dfd.resolve("申请数量不能超过存库量 "+number+".<br/>");
-		}else if($applyNumber.val()>maxnumber){
-			dfd.resolve("申请数量不能超过最大预约量 "+maxnumber+".<br/>");
+		if(typeof(result)=="string"){
+			dfd.resolve(result);
 		}else{
-			dfd.resolve("");
+			var number = result.result[0];
+			var applied = result.extra||0;
+			var maxnumber = number.maxnumber||0;
+			number=number.number||0;
+			if($applyNumber.val()>number){
+				dfd.resolve("申请数量不能超过存库量 "+number+".<br/>");
+			}else if($applyNumber.val()>maxnumber){
+				dfd.resolve("申请数量不能超过最大预约量 "+maxnumber+".<br/>");
+			}else if(applied+parseInt($applyNumber.val())>maxnumber&&$applyNumber.val()>0){
+				dfd.resolve("已经申领 ："+applied+", 最多还能申领："+(maxnumber-applied)+"<br/>");
+			}else{
+				dfd.resolve("");
+			}
 		}
 	});
 	return dfd.promise();

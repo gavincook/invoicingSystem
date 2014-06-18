@@ -16,6 +16,8 @@ public interface ApplyRepository extends BaseRepository<Apply>{
 
 	public Integer countData(@Param("criteria")Criteria criteria);
 	
+	public Integer sum(@Param("userId")Long userId,@Param("storeId")Long storeId);
+	
 	public void changeStatus(@Param("id")Long id,@Param("status")Integer status);
 	
 	public Integer checkRemaind(@Param("id")Long id);

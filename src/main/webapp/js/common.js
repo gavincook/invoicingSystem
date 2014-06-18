@@ -216,6 +216,7 @@ $.fn.reset = function(){
 		setTimeout(function(){
 			$.noty.close(_n.options.id);
 		},3000);
+		return _n;
 	};
 	
 	m.confirm = function(options,layout){

@@ -63,7 +63,7 @@
 
 				<div class="navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
-						<li class="light-blue">
+						<li class="light-blue" id="showMenu">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 							<img class="nav-user-photo" src="assets/avatars/avatar2.png" alt="Jason's Photo" />
 								<span class="user-info">
@@ -74,7 +74,7 @@
 								<i class="fa fa-caret-down"></i>
 							</a>
 
-							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<ul id="detailsMenu" class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
 									<a href="#" data-href="user/changePassword" target="main">
 										<i class="fa fa-cog"></i>
